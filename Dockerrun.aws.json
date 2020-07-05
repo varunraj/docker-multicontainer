@@ -1,0 +1,37 @@
+{
+    "AWSEBDockerrunVersion":2,
+    "containerDefinitions":[
+        {
+            "name":"client",
+            "image":"varunrajdocker/multi-client",
+            "hostname":"client",
+            "essential": false
+        },
+        {
+            "name":"server",
+            "image":"varunrajdocker/multi-server",
+            "hostname":"api",
+            "essential": false
+        },
+        {
+            "name":"worker",
+            "image":"varunrajdocker/multi-worker",
+            "hostname":"worker",
+            "essential": false
+        },
+        {
+            "name":"nginx",
+            "image":"varunrajdocker/multi-nginx",
+            "hostname":"ngnix",
+            "essential": true,
+            "portMappings":[
+                {
+                    "hostPort":80,
+                    "containerPort":80
+                }
+            ],
+            "links":["client","server"]
+
+        }
+    ]
+}
